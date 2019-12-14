@@ -1,16 +1,15 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-stdlib for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-stdlib/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-stdlib/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Stdlib\Hydrator;
+namespace Laminas\Stdlib\Hydrator;
 
-use Zend\ServiceManager\AbstractPluginManager;
-use Zend\Stdlib\Exception;
+use Laminas\ServiceManager\AbstractPluginManager;
+use Laminas\Stdlib\Exception;
 
 /**
  * Plugin manager implementation for hydrators.
@@ -32,7 +31,7 @@ class HydratorPluginManager extends AbstractPluginManager
      * @var array
      */
     protected $aliases = [
-        'delegatinghydrator' => 'Zend\Stdlib\Hydrator\DelegatingHydrator',
+        'delegatinghydrator' => 'Laminas\Stdlib\Hydrator\DelegatingHydrator',
     ];
 
     /**
@@ -41,10 +40,10 @@ class HydratorPluginManager extends AbstractPluginManager
      * @var array
      */
     protected $invokableClasses = [
-        'arrayserializable' => 'Zend\Stdlib\Hydrator\ArraySerializable',
-        'classmethods'      => 'Zend\Stdlib\Hydrator\ClassMethods',
-        'objectproperty'    => 'Zend\Stdlib\Hydrator\ObjectProperty',
-        'reflection'        => 'Zend\Stdlib\Hydrator\Reflection'
+        'arrayserializable' => 'Laminas\Stdlib\Hydrator\ArraySerializable',
+        'classmethods'      => 'Laminas\Stdlib\Hydrator\ClassMethods',
+        'objectproperty'    => 'Laminas\Stdlib\Hydrator\ObjectProperty',
+        'reflection'        => 'Laminas\Stdlib\Hydrator\Reflection'
     ];
 
     /**
@@ -53,6 +52,9 @@ class HydratorPluginManager extends AbstractPluginManager
      * @var array
      */
     protected $factories = [
+        'Laminas\Stdlib\Hydrator\DelegatingHydrator' => 'Laminas\Stdlib\Hydrator\DelegatingHydratorFactory',
+
+        // Legacy Zend Framework aliases
         'Zend\Stdlib\Hydrator\DelegatingHydrator' => 'Zend\Stdlib\Hydrator\DelegatingHydratorFactory',
     ];
 
@@ -67,7 +69,7 @@ class HydratorPluginManager extends AbstractPluginManager
         }
 
         throw new Exception\RuntimeException(sprintf(
-            'Plugin of type %s is invalid; must implement Zend\Stdlib\Hydrator\HydratorInterface',
+            'Plugin of type %s is invalid; must implement Laminas\Stdlib\Hydrator\HydratorInterface',
             (is_object($plugin) ? get_class($plugin) : gettype($plugin))
         ));
     }
